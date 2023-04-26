@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+    <title>Challenge one</title>
+  </head>
+  <body>
+    <img src="img/icon.svg" alt="" class="img" />
+    <div>
+      <h1>Ingrese el texto aquí</h1>
+      <textarea
+        id="texto"
+        name="texto"
+        rows="5"
+        cols="33"
+        class="entrada"
+      ></textarea>
+    </div>
+    <div class="warning">
+      <img src="img/alert.svg" alt="" />
+
+      <label class="anuncio">Solo letras minúsculas y sin acentos</label>
+    </div>
+    <div class="actions">
+      <button onclick="cifrar()" class="encriptar">Encriptar</button>
+      <button onclick="desencriptar()" class="desencriptar">
+        Desencriptar
+      </button>
+    </div>
+    <div class="rpta ">
+      <textarea
+        id="show"
+        name="show"
+        class="answer"
+        disabled="true"
+        placeholder="Tu texto cifrado/descifrado se verá aquí"
+      >
+      </textarea>
+      <button onclick="copiar()" class="copy">Copiar</button>
+    </div>
+  </body>
+</html>
+<script>
+  function cifrar() {
+    let text = document.getElementById("texto").value;
+
+    text = text
+      .replaceAll("e", "enter")
+      .replaceAll("i", "imes")
+      .replaceAll("a", "ai")
+      .replaceAll("o", "ober")
+      .replaceAll("u", "ufat");
+    showText(text);
+  }
+  function desencriptar() {
+    let text = document.getElementById("texto").value;
+    text = text
+      .replaceAll("enter", "e")
+      .replaceAll("imes", "i")
+      .replaceAll("ai", "a")
+      .replaceAll("ober", "o")
+      .replaceAll("ufat", "u");
+    showText(text);
+  }
+
+  function copiar() {
+    var aux = document.createElement("input");
+    aux.setAttribute("value", document.getElementById("show").innerHTML);
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand("copy");
+    document.body.removeChild(aux);
+  }
+
+  function showText(text) {
+    document.getElementById("show").innerHTML = text;
+  }
+</script>
